@@ -30,8 +30,10 @@ if(isset($_POST['edit'])){
 	$id_reward = $_POST['id_reward'];
 	$state = $_POST['state'];
 	$package_name = $_POST['package_name'];
+	$short_description = $_POST['short_description'];
+	$long_description = $_POST['long_description'];
 	$app = new App();
-	$app->app_update($id_app, $app_name, $id_banner, $id_inter, $id_reward, $state, $package_name);
+	$app->app_update($id_app, $app_name, $id_banner, $id_inter, $id_reward, $state, $package_name, $short_description, $long_description);
 }
 if(isset($_POST['update'])){
 	$email = $_POST['email'];

@@ -15,28 +15,28 @@ session_start();
 			// 	//die('Requête invalide : ' . mysql_error());
 			// 	echo 'done';
 			// }
-				header("Location: ../view/test.php");
+				header("Location: ../view/index.php");
 			
 		}
-		function app_update($id_app,$app_name, $id_banner, $id_inter, $id_reward, $state, $package_name) {
+		function app_update($id_app,$app_name, $id_banner, $id_inter, $id_reward, $state, $package_name , $short_description, $long_description) {
 			$id_user = 	$_SESSION["id_user"];
 			// mysqli_query($this->conn, "UPDATE `apps` SET `id_user` = ". $_SESSION["id_user"] .", `app_name` = '$app_name', `id_banner` = '$id_banner', `id_inter` = '$id_inter' , `id_reward` = '$id_reward', , `state` = '$state', , `package_name` = '$package_name' WHERE `id_app` = '$id_app'") or die(mysqli_error());
 			//$query = "UPDATE `apps` SET app_name = '$app_name', id_banne = '$id_banner', id_inter = '$id_inter' , id_reward = '$id_reward',  state = '$state',  package_name = '$package_name' WHERE id_app = '$id_app'";
-			$query = "UPDATE `apps` SET `app_name` = '$app_name', `id_banner` = '$id_banner', `id_inter` = '$id_inter', `id_reward` = '$id_reward', `state` = '$state', `package_name` = '$package_name' WHERE `apps`.`id_app` = $id_app;";
+			$query = "UPDATE `apps` SET `app_name` = '$app_name', `id_banner` = '$id_banner', `id_inter` = '$id_inter', `id_reward` = '$id_reward', `state` = '$state', `package_name` = '$package_name', `short_description` = '$short_description', `long_description` = '$long_description' WHERE `apps`.`id_app` = $id_app;";
 			// $query = "SELECT * from apps WHERE id_user=". $_SESSION["id_user"] ."";
 			$stmt = $this->conn->prepare($query);
 			if(!$stmt){
 				echo "Prepare failed: (". $this->conn->errno.") ".$this->conn->error."<br>";
 			 }
 			$stmt->execute();
-			header("Location: ../view/test.php");	
+			header("Location: ../view/index.php");	
 		}
 		function app_delete($id_app) {	
 			$query = "DELETE FROM apps WHERE id_app=". $id_app ."";
 			// $query = "SELECT * from apps WHERE id_user=". $_SESSION["id_user"] ."";
 			$stmt = $this->conn->prepare($query);
 			$stmt->execute();
-			header("Location: ../view/test.php");
+			header("Location: ../view/index.php");
 		}
 		function app_show_all() {	
 			$query = "SELECT * from apps WHERE id_user=". $_SESSION["id_user"] ."";
@@ -49,6 +49,9 @@ session_start();
 			$query = "SELECT * from apps WHERE id_app=". $id_app ."";
 			$stmt = $this->conn->prepare($query);
 			$stmt->execute();
+			if(!$stmt){
+				echo "Prepare failed: (". $this->conn->errno.") ".$this->conn->error."<br>";
+			 }
 			$result = $stmt->get_result();
 			return  $result;
 		}

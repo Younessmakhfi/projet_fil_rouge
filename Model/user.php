@@ -35,7 +35,7 @@ session_start();
 				$_SESSION["email"] 			= $user_row["email"];
 				$_SESSION["user_api_key"] 	= $user_row["user_api_key"];
 				$_SESSION["name"] 			= $user_row["name"];
-				header("Location: ../view/test.php");
+				header("Location: ../view/show_apps.php");
 			} 
 			else 
 			{		
