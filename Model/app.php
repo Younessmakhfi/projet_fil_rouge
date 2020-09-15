@@ -38,8 +38,29 @@ session_start();
 			$stmt->execute();
 			header("Location: ../view/index.php");
 		}
+		function app_admin_delete($id_app) {	
+			$query = "DELETE FROM apps WHERE id_app=". $id_app ."";
+			// $query = "SELECT * from apps WHERE id_user=". $_SESSION["id_user"] ."";
+			$stmt = $this->conn->prepare($query);
+			$stmt->execute();
+			header("Location: ../view/admin_apps.php");
+		}
 		function app_show_all() {	
 			$query = "SELECT * from apps WHERE id_user=". $_SESSION["id_user"] ."";
+			$stmt = $this->conn->prepare($query);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			return  $result;
+		}
+		function app_show_all_users() {
+			$query = "SELECT * from apps";
+			$stmt = $this->conn->prepare($query);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			return  $result;
+		}
+		function get_user_name($user_id) {
+			$query = "SELECT * from users WHERE id_user=". $user_id ."";
 			$stmt = $this->conn->prepare($query);
 			$stmt->execute();
 			$result = $stmt->get_result();

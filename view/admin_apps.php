@@ -7,7 +7,7 @@ if( !isset($_SESSION["name"]) ){
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Admob Manager - User</title>
+  	<title>Admob Manager - Admin</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -85,31 +85,25 @@ a {
   </head>
   <body>
   <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-  <div class="wrapper d-flex align-items-stretch">
+		<div class="wrapper d-flex align-items-stretch" >
 			<nav id="sidebar" class="active">
-				<div class="custom-menu">
+				<div class="custom-menu" style="backgeound-color : black;">
 					<button type="button" id="sidebarCollapse" class="btn btn-primary fixed-top">
 	          <i class="fa fa-bars"></i>
 	          <span class="sr-only">Toggle Menu</span>
 	        </button>
         </div>
 				<div class="p-4">
-		  		<h1><a href="index.html" class="logo">Flash</a></h1>
+		  		<h1><a href="index.php" class="logo">Flash</a></h1>
 	        <ul class="list-unstyled components mb-5">
+	          <li >
+	            <a href="admin_users.php"><span class="fa fa-home mr-3"></span>Users List</a>
+	          </li>
 	          <li class="active">
-	            <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+	              <a href="admin_apps.php"><span class="fa fa-user mr-3"></span>Users Apps</a>
 	          </li>
-	          <li>
-	              <a href="#"><span class="fa fa-user mr-3"></span> Profile</a>
-	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-briefcase mr-3"></span> New app</a>
-	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
-	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+	          <li >
+              <a href="#"><span class="fa fa-briefcase mr-3"></span>Logout</a>
 	          </li>
 	        </ul>
 
@@ -123,11 +117,7 @@ a {
 	          </form>
 					</div>
 
-	        <div class="footer">
-	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	        </div>
+	      
 
 	      </div>
     	</nav>
@@ -151,13 +141,13 @@ a {
                                 <th><span>App name</span></th>
                                 <th><span>Package name</span></th>
                                 <th><span>State</span></th>
-                                
+                                <th><span>Owner</span></th>
                                 <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <?php
 				$users = new App();
-                   $result = $users -> app_show_all();
+                   $result = $users -> app_show_all_users();
    				while($row = $result->fetch_assoc()){
                     ?>
                         
@@ -175,7 +165,14 @@ a {
                                     <td>
                                         <a href="#"><?php echo $row['state'] ?></a>
                                     </td>
-                          
+                                    <td>
+                                    <?php
+				$users2 = new App();
+                   $result2 = $users2 -> get_user_name($row['id_user'] );
+   				$row2 = $result2->fetch_assoc();
+                    ?>
+                                        <a href="#"><?php echo $row2['name'] ?></a>
+                                    </td>
                                     
                                     
                                     <td style="width: 20%;">
@@ -185,14 +182,7 @@ a {
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
                                             </span>
                                         </a>
-                                        <a href="edit_app.php?id_app=<?= $row['id_app']; ?>&edit=" class="table-link Success">
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-edit fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        </a>
                                     </td>
-                                    
                                 </tr>
                                 
                                 

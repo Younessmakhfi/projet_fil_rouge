@@ -7,6 +7,12 @@ if(isset($_GET['id_app'])&&isset($_GET['delete']))
 	$app->app_delete($_GET['id_app']);
 	
 }
+if(isset($_GET['id_app'])&&isset($_GET['admin_delete']))
+{
+	$app = new App();
+	$app->app_admin_delete($_GET['id_app']);
+	
+}
 if(isset($_GET['id_app'])&&isset($_GET['edit']))
 {
     echo $_GET['id_app'] . " : edit";

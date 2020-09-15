@@ -1,8 +1,17 @@
+<?php
+session_start();
+if($_GET){
+	unset($_SESSION['id_user']);
+	unset($_SESSION['email']);
+	unset($_SESSION['user_api_key']);
+	unset($_SESSION['name']);    
+	}
+	 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Form-v8 by Colorlib</title>
+	<title>Login</title>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Font-->
