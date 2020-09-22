@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
   <head>
+  <?php
+  include('../../Model/app.php');
+  if( !isset($_SESSION["name"]) ){
+    header("Location: ../regestration/login.php");	
+  }
+  if($_SESSION["email"] == "admin@gmail.com"){
+    header("Location: ../admin/admin_users.php");
+}
+  ?>
   	<title>Sidebar 03</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="menu/css/style.css">
+		<link rel="stylesheet" href="../menu/css/style.css">
   </head>
   <body>
   
@@ -21,22 +30,19 @@
 	        </button>
         </div>
 				<div class="p-4">
-		  		<h1><a href="index.php" class="logo">Flash</a></h1>
+		  		<h1><a href="index.php" class="logo">Admob Manager</a></h1>
 	        <ul class="list-unstyled components mb-5">
-	          <li >
+            <li >
 	            <a href="index.php"><span class="fa fa-home mr-3"></span> Home</a>
 	          </li>
-	          <li >
-	              <a href="#"><span class="fa fa-user mr-3"></span> Profile</a>
+	          <li>
+	              <a href="profile.php"><span class="fa fa-user mr-3"></span> Profile</a>
 	          </li>
 	          <li class="active">
-              <a href="#"><span class="fa fa-briefcase mr-3"></span> New app</a>
+              <a href="new_app.php"><span class="fa fa-briefcase mr-3"></span> New app</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
-	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+              <a href="../regestration/login.php?logout"><span class="fa fa-sticky-note mr-3"></span> Log out</a>
 	          </li>
 	        </ul>
 
@@ -68,13 +74,13 @@
                 <div class="card mt-2 mx-auto p-4 bg-light">
                     <div class="card-body bg-light">
                         <div class="container">
-                            <form id="contact-form" name="f1" action="../controller/App_controller.php" method="POST">
+                            <form id="contact-form" name="f1" action="../../controller/App_controller.php" method="POST">
                                 <div class="controls">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group"> 
                                               <label for="form_name">ID *</label> 
-                                              <input id="form_name" type="text" placeholder="id_app" name="id_app" class="form-control" required="required" data-error="Firstname is required."  /> </div>
+                                              <input value="auto generated" id="form_name" type="text" placeholder="id_app" name="id_app" class="form-control" required="required" data-error="Firstname is required."  readonly/> </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group"> <label for="form_lastname">Application name *</label> <input id="form_lastname" type="text" placeholder="app_name" name="app_name" class="form-control"  required="required" data-error="Lastname is required." > </div>
@@ -129,7 +135,7 @@
                                                 <label for="form_message">Write a short description about your app *</label> 
                                                 <textarea id="form_message"  class="form-control" placeholder="Long Description about your app"  rows="4" required="required" data-error="Please, descripe your app." name="long_description" ></textarea> </div>
                                         </div>
-                                        <div class="col-md-12"> <input type="submit" class="btn btn-success btn-send pt-2 btn-block " name="edit" type="submit" value="Create"> </div>
+                                        <div class="col-md-12"> <input type="submit" class="btn btn-success btn-send pt-2 btn-block " name="create" type="submit" value="create"> </div>
                                     </div>
                                     <div class="row" style="margin-top : 10px">
                                         
@@ -148,9 +154,9 @@
       </div>
 		</div>
 
-    <script src="menu/js/jquery.min.js"></script>
-    <script src="menu/js/popper.js"></script>
-    <script src="menu/js/bootstrap.min.js"></script>
-    <script src="menu/js/main.js"></script>
+    <script src="../menu/js/jquery.min.js"></script>
+    <script src="../menu/js/popper.js"></script>
+    <script src="../menu/js/bootstrap.min.js"></script>
+    <script src="../menu/js/main.js"></script>
     </body>
 </html>

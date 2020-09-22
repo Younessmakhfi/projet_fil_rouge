@@ -5,7 +5,7 @@ session_start();
  class User{
 
 		function __construct() {
-			$this->conn = new mysqli("localhost","root","123","admobmanagement");
+			$this->conn = new mysqli("localhost","root","","admobmanagement");
 		}
 		function user_insert($name, $email,$password,$user_api_key) {	
 			$query = "SELECT * FROM users WHERE email='". $email ."'";
@@ -21,9 +21,12 @@ session_start();
 // if succeced				
 			$stmt =$this->conn->prepare("INSERT Into users (name, email, password, user_api_key) values(?,?,?,?)");
 			$stmt->bind_param("ssss", $name, $email, $password, $user_api_key);
+			if(!$stmt){
+				echo "Prepare failed: (". $this->conn->errno.") ".$this->conn->error."<br>";
+			 }
 			$stmt->execute();
 				//echo "signup done";
-				header("Location: ../view/login.php");
+				header("Location: ../view/regestration/login.php");
 			}
 		}
 		function user_change_info($email, $password) {	
@@ -32,7 +35,7 @@ session_start();
 			if ($result->num_rows == 1) {		
 				echo "<script>
 						alert('sorry this email aleardy exist');
-						window.location.href='../view/profile.php';
+						window.location.href='../view/user/profile.php';
 						</script>";			
 			} 
 			else 
@@ -50,7 +53,7 @@ session_start();
 				echo "signup done";
 				echo "<script>
 						alert('Your data has been saved');
-						window.location.href='../view/profile.php';
+						window.location.href='../view/user/profile.php';
 						</script>";
 			}
 		}
@@ -63,7 +66,12 @@ session_start();
 				$_SESSION["email"] 			= $user_row["email"];
 				$_SESSION["user_api_key"] 	= $user_row["user_api_key"];
 				$_SESSION["name"] 			= $user_row["name"];
-				header("Location: ../view/show_apps.php");
+				if($_SESSION["email"] == "admin@gmail.com"){
+					header("Location: ../view/admin/admin_users.php");
+				}else{
+					header("Location: ../view/user/index.php");
+				}
+				
 			} 
 			else 
 			{		
@@ -88,7 +96,7 @@ session_start();
 			$query = "DELETE FROM users WHERE id_user=". $id_user ."";
 			$stmt = $this->conn->prepare($query);
 			$stmt->execute();
-			header("Location: ../view/admin_users.php");
+			header("Location: ../view/admin/admin_users.php");
 		}
 
 }

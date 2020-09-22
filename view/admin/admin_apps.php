@@ -1,7 +1,10 @@
 <?php
-include('../Model/app.php');
+include('../../Model/app.php');
 if( !isset($_SESSION["name"]) ){
-  header("Location: regestration/login.php");	
+  header("Location: ../regestration/login.php");	
+}
+if($_SESSION["email"] != "admin@gmail.com"){
+    header("Location: ../user/index.php");
 }
 ?>
 <!doctype html>
@@ -14,7 +17,7 @@ if( !isset($_SESSION["name"]) ){
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="menu/css/style.css">
+    <link rel="stylesheet" href="../menu/css/style.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
     	body{
@@ -94,7 +97,7 @@ a {
 	        </button>
         </div>
 				<div class="p-4">
-		  		<h1><a href="index.php" class="logo">Flash</a></h1>
+		  		<h1><a href="index.php" class="logo">Admob Manager</a></h1>
 	        <ul class="list-unstyled components mb-5">
 	          <li >
 	            <a href="admin_users.php"><span class="fa fa-home mr-3"></span>Users List</a>
@@ -102,8 +105,8 @@ a {
 	          <li class="active">
 	              <a href="admin_apps.php"><span class="fa fa-user mr-3"></span>Users Apps</a>
 	          </li>
-	          <li >
-              <a href="#"><span class="fa fa-briefcase mr-3"></span>Logout</a>
+              <li>
+              <a href="../regestration/login.php?logout"><span class="fa fa-sticky-note mr-3"></span> Log out</a>
 	          </li>
 	        </ul>
 
@@ -176,7 +179,7 @@ a {
                                     
                                     
                                     <td style="width: 20%;">
-                                        <a href="../controller/App_controller.php?id_app=<?= $row['id_app']; ?>&admin_delete=" class="table-link danger">
+                                        <a href="../../controller/App_controller.php?id_app=<?= $row['id_app']; ?>&admin_delete=" class="table-link danger">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
@@ -202,9 +205,9 @@ a {
       </div>
 		</div>
 
-    <script src="menu/js/jquery.min.js"></script>
-    <script src="menu/js/popper.js"></script>
-    <script src="menu/js/bootstrap.min.js"></script>
-    <script src="menu/js/main.js"></script>
+    <script src="../menu/js/jquery.min.js"></script>
+    <script src="../menu/js/popper.js"></script>
+    <script src="../menu/js/bootstrap.min.js"></script>
+    <script src="../menu/js/main.js"></script>
     </body>
 </html>

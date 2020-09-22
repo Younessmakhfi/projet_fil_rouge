@@ -1,8 +1,11 @@
 
 <?php
-include('../Model/user.php');
+include('../../Model/user.php');
 if( !isset($_SESSION["name"]) ){
-  header("Location: regestration/login.php");	
+  header("Location: ../regestration/login.php");	
+}
+if($_SESSION["email"] == "admin@gmail.com"){
+  header("Location: ../admin/admin_users.php");
 }
 ?>
 <!doctype html>
@@ -15,7 +18,7 @@ if( !isset($_SESSION["name"]) ){
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="menu/css/style.css">
+		<link rel="stylesheet" href="../menu/css/style.css">
   </head>
   <body>
   <?php
@@ -32,22 +35,19 @@ if( !isset($_SESSION["name"]) ){
 	        </button>
         </div>
 				<div class="p-4">
-		  		<h1><a href="index.php" class="logo">Flash</a></h1>
+		  		<h1><a href="index.php" class="logo">Admob Manager</a></h1>
 	        <ul class="list-unstyled components mb-5">
-	          <li >
+          <li >
 	            <a href="index.php"><span class="fa fa-home mr-3"></span> Home</a>
 	          </li>
 	          <li class="active">
-	              <a href="#"><span class="fa fa-user mr-3"></span> Profile</a>
-	          </li>
-	          <li >
-              <a href="#"><span class="fa fa-briefcase mr-3"></span> New app</a>
+	              <a href="profile.php"><span class="fa fa-user mr-3"></span> Profile</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
+              <a href="new_app.php"><span class="fa fa-briefcase mr-3"></span> New app</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+              <a href="../regestration/login.php?logout"><span class="fa fa-sticky-note mr-3"></span> Log out</a>
 	          </li>
 	        </ul>
 
@@ -79,7 +79,7 @@ if( !isset($_SESSION["name"]) ){
                 <div class="card mt-2 mx-auto p-4 bg-light">
                     <div class="card-body bg-light">
                         <div class="container">
-                            <form id="contact-form" name="f1" action="../controller/user_controller.php" method="POST">
+                            <form id="contact-form" name="f1" action="../../controller/user_controller.php" method="POST">
                                 <div class="controls">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -130,9 +130,9 @@ if( !isset($_SESSION["name"]) ){
       </div>
 		</div>
 
-    <script src="menu/js/jquery.min.js"></script>
-    <script src="menu/js/popper.js"></script>
-    <script src="menu/js/bootstrap.min.js"></script>
-    <script src="menu/js/main.js"></script>
+    <script src="../menu/js/jquery.min.js"></script>
+    <script src="../menu/js/popper.js"></script>
+    <script src="../menu/js/bootstrap.min.js"></script>
+    <script src="../menu/js/main.js"></script>
     </body>
 </html>

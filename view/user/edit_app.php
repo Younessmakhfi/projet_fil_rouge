@@ -8,12 +8,17 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="menu/css/style.css">
+		<link rel="stylesheet" href="../menu/css/style.css">
   </head>
   <body>
   <?php
-
-include('../model/app.php');
+  include('../../model/app.php');
+if( !isset($_SESSION["name"]) ){
+    header("Location: ../regestration/login.php");	
+  }
+  if($_SESSION["email"] == "admin@gmail.com"){
+    header("Location: ../admin/admin_users.php");
+}
 if(isset($_GET['id_app'])&&isset($_GET['edit']))
 {
 	$app = new App();
@@ -29,22 +34,19 @@ if(isset($_GET['id_app'])&&isset($_GET['edit']))
 	        </button>
         </div>
 				<div class="p-4">
-		  		<h1><a href="index.html" class="logo">Flash</a></h1>
+		  		<h1><a href="index.php" class="logo">Admob Manager</a></h1>
 	        <ul class="list-unstyled components mb-5">
-	          <li class="active">
-	            <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+          <li class="active">
+	            <a href="index.php"><span class="fa fa-home mr-3"></span> Home</a>
 	          </li>
 	          <li>
-	              <a href="#"><span class="fa fa-user mr-3"></span> Profile</a>
+	              <a href="profile.php"><span class="fa fa-user mr-3"></span> Profile</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-briefcase mr-3"></span> New app</a>
+              <a href="new_app.php"><span class="fa fa-briefcase mr-3"></span> New app</a>
 	          </li>
 	          <li>
-              <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
-	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+              <a href="../regestration/login.php?logout"><span class="fa fa-sticky-note mr-3"></span> Log out</a>
 	          </li>
 	        </ul>
 
@@ -86,7 +88,7 @@ if(isset($_GET['id_app'])&&isset($_GET['edit']))
                                         <div class="col-md-6">
                                             <div class="form-group"> 
                                               <label for="form_name">ID *</label> 
-                                              <input id="form_name" type="text" placeholder="id_app" name="id_app" class="form-control" required="required" data-error="Firstname is required." value="<?php echo $row['id_app'] ?>" /> </div>
+                                              <input id="form_name" type="text" placeholder="id_app" name="id_app" class="form-control" required="required" data-error="Firstname is required." value="<?php echo $row['id_app'] ?>" readonly/> </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group"> <label for="form_lastname">Application name *</label> <input id="form_lastname" type="text" placeholder="app_name" name="app_name" class="form-control"  required="required" data-error="Lastname is required." value="<?php echo $row['app_name'] ?>"> </div>
@@ -113,7 +115,7 @@ if(isset($_GET['id_app'])&&isset($_GET['edit']))
                                         <div class="col-md-6">
                                             <div class="form-group"> 
                                               <label for="form_lastname">Package name *</label> 
-                                              <input id="form_lastname" type="text"  class="form-control"  required="required" data-error="Lastname is required." placeholder="package name" name="package_name" value="<?php echo $row['package_name'] ?>"> </div>
+                                              <input id="form_lastname" type="text"  class="form-control"  required="required" data-error="Lastname is required." placeholder="package name" name="package_name" value="<?php echo $row['package_name'] ?>" readonly> </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -164,9 +166,9 @@ if(isset($_GET['id_app'])&&isset($_GET['edit']))
       </div>
 		</div>
 
-    <script src="menu/js/jquery.min.js"></script>
-    <script src="menu/js/popper.js"></script>
-    <script src="menu/js/bootstrap.min.js"></script>
-    <script src="menu/js/main.js"></script>
+    <script src="../menu/js/jquery.min.js"></script>
+    <script src="../menu/js/popper.js"></script>
+    <script src="../menu/js/bootstrap.min.js"></script>
+    <script src="../menu/js/main.js"></script>
     </body>
 </html>

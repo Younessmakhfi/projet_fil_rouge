@@ -1,20 +1,23 @@
 <?php
-include('../Model/app.php');
+include('../../Model/user.php');
 if( !isset($_SESSION["name"]) ){
-  header("Location: regestration/login.php");	
+  header("Location: ../regestration/login.php");	
+}
+if($_SESSION["email"] != "admin@gmail.com"){
+    header("Location: ../user/index.php");
 }
 ?>
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Admob Manager - User</title>
+  	<title>Admob Manager - Admin</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="menu/css/style.css">
+    <link rel="stylesheet" href="../menu/css/style.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
     	body{
@@ -85,51 +88,29 @@ a {
   </head>
   <body>
   <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-  <div class="wrapper d-flex align-items-stretch">
+		<div class="wrapper d-flex align-items-stretch" >
 			<nav id="sidebar" class="active">
-				<div class="custom-menu">
+				<div class="custom-menu" style="backgeound-color : black;">
 					<button type="button" id="sidebarCollapse" class="btn btn-primary fixed-top">
 	          <i class="fa fa-bars"></i>
 	          <span class="sr-only">Toggle Menu</span>
 	        </button>
         </div>
 				<div class="p-4">
-		  		<h1><a href="index.html" class="logo">Flash</a></h1>
+		  		<h1><a href="index.php" class="logo">Admob Manager</a></h1>
 	        <ul class="list-unstyled components mb-5">
-	          <li class="active">
-	            <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+            <li class="active">
+	            <a href="admin_users.php"><span class="fa fa-home mr-3"></span>Users List</a>
 	          </li>
-	          <li>
-	              <a href="#"><span class="fa fa-user mr-3"></span> Profile</a>
+	          <li >
+	              <a href="admin_apps.php"><span class="fa fa-user mr-3"></span>Users Apps</a>
 	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-briefcase mr-3"></span> New app</a>
-	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
-	          </li>
-	          <li>
-              <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+              <li>
+              <a href="../regestration/login.php?logout"><span class="fa fa-sticky-note mr-3"></span> Log out</a>
 	          </li>
 	        </ul>
 
-	        <div class="mb-5">
-						<h3 class="h6 mb-3">Subscribe for newsletter</h3>
-						<form action="#" class="subscribe-form">
-	            <div class="form-group d-flex">
-	            	<div class="icon"><span class="icon-paper-plane"></span></div>
-	              <input type="text" class="form-control" placeholder="Enter Email Address">
-	            </div>
-	          </form>
-					</div>
-
-	        <div class="footer">
-	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	        </div>
-
-	      </div>
+	  
     	</nav>
 
         <!-- Page Content  -->
@@ -147,52 +128,42 @@ a {
                         <table class="table user-list">
                             <thead>
                                 <tr>
-                                <th><span>App ID</span></th>
-                                <th><span>App name</span></th>
-                                <th><span>Package name</span></th>
-                                <th><span>State</span></th>
-                                
+                                <th><span>User ID</span></th>
+                                <th><span>User name</span></th>
+                                <th><span>Hash-key</span></th>
+                                <th><span>Email</span></th>
                                 <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <?php
-				$users = new App();
-                   $result = $users -> app_show_all();
+				$users = new User();
+                   $result = $users -> show_all_users();
    				while($row = $result->fetch_assoc()){
                     ?>
                         
                             <tbody>
                                 <tr>
-                                <td><?php echo $row['id_app'] ?></td>
+                                <td><?php echo $row['id_user'] ?></td>
                                     <td>
-                                        <img src="https://res.cloudinary.com/hy4kyit2a/f_auto,fl_lossy,q_70/learn/modules/wave_apps_sales_wave/ef3f2e04df27b4279cba2a3f13bcc64b_badge.png" alt="">
-                                        <a href="#" class="user-link"><?php echo $row['app_name'] ?></a>
-                                        
+                                        <img src="https://cdn.iconscout.com/icon/free/png-512/laptop-user-1-1179329.png" alt="">
+                                        <a href="#" class="user-link"><?php echo $row['name'] ?></a>
+                                        <span class="user-subhead">Member</span>
                                     </td>
                                     <td>
-                                    <?php echo $row['package_name'] ?>
+                                    <?php echo $row['user_api_key'] ?>
                                     </td>
                                     <td>
-                                        <a href="#"><?php echo $row['state'] ?></a>
+                                        <a href="#"><?php echo $row['email'] ?></a>
                                     </td>
-                          
-                                    
                                     
                                     <td style="width: 20%;">
-                                        <a href="../controller/App_controller.php?id_app=<?= $row['id_app']; ?>&admin_delete=" class="table-link danger">
+                                        <a href="../../controller/User_controller.php?id_user=<?= $row['id_user']; ?>&delete=" class="table-link danger">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
                                             </span>
                                         </a>
-                                        <a href="edit_app.php?id_app=<?= $row['id_app']; ?>&edit=" class="table-link Success">
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-edit fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        </a>
                                     </td>
-                                    
                                 </tr>
                                 
                                 
@@ -212,9 +183,9 @@ a {
       </div>
 		</div>
 
-    <script src="menu/js/jquery.min.js"></script>
-    <script src="menu/js/popper.js"></script>
-    <script src="menu/js/bootstrap.min.js"></script>
-    <script src="menu/js/main.js"></script>
+    <script src="../menu/js/jquery.min.js"></script>
+    <script src="../menu/js/popper.js"></script>
+    <script src="../menu/js/bootstrap.min.js"></script>
+    <script src="../menu/js/main.js"></script>
     </body>
 </html>

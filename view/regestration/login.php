@@ -34,18 +34,18 @@ if($_GET){
 						<button class="tablinks" onclick="openCity(event, 'sign-in')" id="defaultOpen">Sign In</button>
 					</div>
 				</div>
-				<form class="form-detail" action="#" method="post">
+				<form class="form-detail" name="f1" action="../../controller/user_controller.php" method="POST">
 					<div class="tabcontent" id="sign-up">
 						<div class="form-row">
 							<label class="form-row-inner">
-								<input type="text" name="full_name" id="full_name" class="input-text" required>
+								<input type="text" name="name" id="full_name" class="input-text" required>
 								<span class="label">Username</span>
 		  						<span class="border"></span>
 							</label>
 						</div>
 						<div class="form-row">
 							<label class="form-row-inner">
-								<input type="text" name="your_email" id="your_email" class="input-text" required>
+								<input type="text" name="email" id="your_email" class="input-text" required>
 								<span class="label">E-Mail</span>
 		  						<span class="border"></span>
 							</label>
@@ -65,13 +65,12 @@ if($_GET){
 							</label>
 						</div>
 						<div class="form-row-last">
-							<input type="submit" name="register" class="register" value="Register">
+							<input type="submit" name="signup" class="register" value="Register">
 						</div>
 					</div>
 				</form>
 				<form class="form-detail" name="f1" action="../../controller/user_controller.php" method="POST" onsubmit="return matchpass()">
 					<div class="tabcontent" id="sign-in">
-						
 						<div class="form-row">
 							<label class="form-row-inner">
 								<input type="text" name="email" id="your_email_1" class="input-text" required>
